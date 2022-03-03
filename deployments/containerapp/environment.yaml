@@ -2,6 +2,7 @@ apiVersion: azure.418.cloud/v1alpha1
 kind: ContainerEnvironment
 metadata:
   name: containerenvironment-sample
+  namespace: default
 spec:
   name: example-kubeenv
   location: westeurope

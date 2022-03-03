@@ -2,6 +2,7 @@ apiVersion: azure.418.cloud/v1alpha1
 kind: ContainerApp
 metadata:
   name: containerapp-sample
+  namespace: default
 spec:
   containerEnvironmentName: containerenvironment-sample
   targetPort: 8080
