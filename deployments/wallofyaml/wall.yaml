@@ -1,0 +1,108 @@
+---
+# Source: hello-go-web/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: wall-of-yaml
+  labels:
+    {}
+spec:
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: http
+  selector:
+    app: wall-of-yaml
+  sessionAffinity: None
+  type: ClusterIP
+---
+# Source: hello-go-web/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: wall-of-yaml
+  name: wall-of-yaml
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wall-of-yaml
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: wall-of-yaml
+      annotations:
+        linkerd.io/inject: enabled
+        config.linkerd.io/proxy-cpu-request: 100m
+        config.linkerd.io/proxy-memory-limit: 250Mi
+        config.linkerd.io/proxy-memory-request: 20Mi
+    spec:
+      containers:
+      - image: ghcr.io/418-cloud/testapp:v0.0.1
+        name: wall-of-yaml
+        args:
+        - -rootContext=/wall
+        - -response="Hello, World" 
+        - -title="418 demo"
+        readinessProbe:
+          failureThreshold: 3
+          successThreshold: 1
+          initialDelaySeconds: 1
+          timeoutSeconds: 1
+          periodSeconds: 5
+          httpGet:
+            path: /wall/hello
+            port: 8080
+        livenessProbe:
+          failureThreshold: 3
+          successThreshold: 1
+          initialDelaySeconds: 1
+          timeoutSeconds: 1
+          periodSeconds: 5
+          httpGet:
+            path: /hello
+            port: 8080
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 100m
+            memory: 128Mi
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+---
+# Source: hello-go-web/templates/traefikingress.yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: wall-of-yaml
+  labels:
+    {}
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`azr.418.cloud`) && (PathPrefix(`/wall`))
+    kind: Rule
+    middlewares:
+    - name: "wall-of-yaml-l5d-header-middleware"
+    services:
+    - name: wall-of-yaml
+      port: 8080
+---
+# Source: hello-go-web/templates/l5-middelware.yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: "wall-of-yaml-l5d-header-middleware"
+spec:
+  headers:
+    customRequestHeaders:
+      l5d-dst-override: "wall-of-yaml.default.svc.cluster.local:8080"
