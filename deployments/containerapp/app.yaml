@@ -1,0 +1,16 @@
+apiVersion: azure.418.cloud/v1alpha1
+kind: ContainerApp
+metadata:
+  name: containerapp-sample
+spec:
+  containerEnvironmentName: containerenvironment-sample
+  targetPort: 8080
+  containersTemplate:
+    name: testapp
+    image: ghcr.io/418-cloud/testapp:v0.0.1
+    args:
+    - -response=Hi, I'm running outside the cluster in azure container apps
+    - -title=Azure containerapps
+    resources:
+      cpu: ".25"
+      memory: ".5Gi"
