@@ -2,6 +2,7 @@ apiVersion: k8s.418.cloud/v1alpha1
 kind: TeapotApp
 metadata:
   name: teapotapp-sample
+  namespace: default
 spec:
   image: ghcr.io/418-cloud/testapp:v0.0.1
   args:
