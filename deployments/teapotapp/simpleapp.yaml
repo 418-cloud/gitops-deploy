@@ -5,14 +5,8 @@ metadata:
   namespace: default
 spec:
   image: ghcr.io/418-cloud/testapp:v0.0.1
+  path: /simple
   args:
   - -rootContext=/simple
   - -response=Hi, my deploy yaml is a bit shorter
   - title=418 demo
-  scale:
-    replicas: 1
-    autoscaling:
-      enabled: true
-      minReplicas: 2
-      maxReplicas: 4
-  path: /simple
