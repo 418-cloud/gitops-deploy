@@ -99,6 +99,10 @@ spec:
     services:
     - name: wall-of-yaml
       port: 8080
+  tls:
+    secretName: azr-418-cloud-cert
+    domains:
+    - main: azr.418.cloud      
 ---
 # Source: hello-go-web/templates/l5-middelware.yaml
 apiVersion: traefik.containo.us/v1alpha1
