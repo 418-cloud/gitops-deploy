@@ -1,0 +1,17 @@
+apiVersion: k8s.418.cloud/v1alpha1
+kind: TeapotApp
+metadata:
+  name: teapotapp-sample
+spec:
+  image: ghcr.io/418-cloud/testapp:v0.0.1
+  args:
+  - -rootContext=/simple
+  - -response=Hi, my deploy yaml is a bit shorter
+  - title=418 demo
+  scale:
+    replicas: 1
+    autoscaling:
+      enabled: true
+      minReplicas: 2
+      maxReplicas: 4
+  path: /simple
