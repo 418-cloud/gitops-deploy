@@ -3,6 +3,8 @@ kind: TeapotApp
 metadata:
   name: teapotapp-sample
   namespace: default
+  labels:
+    teapot: sample-app
 spec:
   image: ghcr.io/418-cloud/testapp:v0.0.1
   path: /simple
