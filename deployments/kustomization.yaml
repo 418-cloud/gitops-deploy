@@ -1,8 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources: 
-  - ./wallofyaml/wall.yaml
   - ./containerapp/environment.yaml
+  # - ./wallofyaml/wall.yaml
   # - ./teapotapp/simpleapp.yaml
   # - ./containerapp/app.yaml
   # - ./helmapp
