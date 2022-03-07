@@ -6,7 +6,7 @@ metadata:
   name: wall-of-yaml
   namespace: default
   labels:
-    {}
+    app: wall-of-yaml
 spec:
   ports:
   - name: http
@@ -86,7 +86,7 @@ metadata:
   name: wall-of-yaml
   namespace: default
   labels:
-    {}
+    app: wall-of-yaml
 spec:
   entryPoints:
     - web
@@ -110,6 +110,8 @@ kind: Middleware
 metadata:
   name: "wall-of-yaml-l5d-header-middleware"
   namespace: default
+  labels:
+    app: wall-of-yaml
 spec:
   headers:
     customRequestHeaders:
