@@ -1,5 +1,4 @@
 ---
-# Source: hello-go-web/templates/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -18,7 +17,6 @@ spec:
   sessionAffinity: None
   type: ClusterIP
 ---
-# Source: hello-go-web/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -79,7 +77,6 @@ spec:
           name: http
           protocol: TCP
 ---
-# Source: hello-go-web/templates/traefikingress.yaml
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
