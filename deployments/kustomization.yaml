@@ -4,5 +4,5 @@ resources:
   - ./containerapp/environment.yaml
   - ./wallofyaml/wall.yaml
   - ./teapotapp/simpleapp.yaml
-  # - ./containerapp/app.yaml
+  - ./containerapp/app.yaml
   # - ./helmapp
