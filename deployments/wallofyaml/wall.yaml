@@ -46,7 +46,7 @@ spec:
         args:
         - -rootContext=/wall
         - -response=Hi, I'm deployed with a wall of yaml
-        - -title="418 demo"
+        - -title=418 demo
         readinessProbe:
           failureThreshold: 3
           successThreshold: 1
