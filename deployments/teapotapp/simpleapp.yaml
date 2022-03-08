@@ -11,4 +11,4 @@ spec:
   args:
   - -rootContext=/simple
   - -response=Hi, my deploy yaml is a bit shorter
-  - title=418 demo
+  - -title=418 demo
