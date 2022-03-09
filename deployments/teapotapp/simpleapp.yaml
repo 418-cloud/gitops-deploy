@@ -10,5 +10,5 @@ spec:
   path: /simple
   args:
   - -rootContext=/simple
-  - -response=Hi, my deploy yaml is a bit shorter
+  - -response=Hei devopsdagar, my deploy yaml is a bit shorter
   - -title=418 demo
